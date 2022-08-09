@@ -1,14 +1,7 @@
 #!/usr/bin/env bash
 
-main(){
-  clear && printf " 
- █████╗ ██████╗  ██████╗██╗  ██╗       ██████╗██╗  ██╗██████╗  ██████╗  ██████╗ ████████╗
-██╔══██╗██╔══██╗██╔════╝██║  ██║      ██╔════╝██║  ██║██╔══██╗██╔═══██╗██╔═══██╗╚══██╔══╝
-███████║██████╔╝██║     ███████║█████╗██║     ███████║██████╔╝██║   ██║██║   ██║   ██║   
-██╔══██║██╔══██╗██║     ██╔══██║╚════╝██║     ██╔══██║██╔══██╗██║   ██║██║   ██║   ██║   
-██║  ██║██║  ██║╚██████╗██║  ██║      ╚██████╗██║  ██║██║  ██║╚██████╔╝╚██████╔╝   ██║   
-╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝       ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═╝\n\n"
-}
+# Franklin Souza
+# @FranklinTech
 
 dhcpcd_enable(){
   systemctl enable dhcpcd
@@ -22,7 +15,7 @@ timedatectl set-ntp true
 
 language_system(){
   nvim /etc/locale.gen
-  locale-gen
+  clear && locale-gen
   printf "\nCole a linguagem descomentada abaixo (Ex: en_US.UTF-8):\n\n"
   read LANGUAGE
   echo LANG="$LANGUAGE" > /etc/locale.conf
@@ -71,7 +64,7 @@ repo_update(){
 }
 
 password_root(){
-  clear && print "Digite e confirme sua senha root abaixo (CUIDADO A SENHA NÃO É EXIBIDA):\n\n"
+  clear && printf "Digite e confirme sua senha root abaixo (CUIDADO A SENHA NÃO É EXIBIDA):\n\n"
   passwd
 }
 
@@ -88,7 +81,7 @@ user_create(){
     clear && pacman -S zsh --noconfirm
     clear && printf "Digite o nome do seu usuario abaixo (COM LETRAS MINUSCULAS SEM ACENTOS E SEM ESPAÇOS):\n\n"
     read USERNAME
-    clear && useradd -m -g users -G wheel -s /bin/bash "$USERNAME"
+    clear && useradd -m -g users -G wheel -s /bin/zsh "$USERNAME"
 
   else
     read -p 'Opção invalida, por favor tente novamente PRESSIONE ENTER PARA CONTINUAR...' && user_create
@@ -97,7 +90,7 @@ user_create(){
 
 password_user(){
   clear && read -p 'Digite e confirme a sua senha de usuario abaixo (CUIDADO A SENHA NÃO É EXIBIDA) PRESSIONE ENTER PARA CONTINUAR...'
-  clear && printf "Digite seu nome de usuario abaixo:\n\n"
+  clear && read -p 'Digite o nome do seu user abaixo:'
   read USERNAME1
   passwd "$USERNAME1"
 }
@@ -116,7 +109,6 @@ finish_install(){
   clear && read -p 'Instalação finalizada, NÃO ESQUEÇA DE SAIR DO CHROOT E REBOOTAR O PC!!! PRESSIONE ENTER PARA CONTINUAR...' && exit 0
 }
 
-main
 dhcpcd_enable
 timezone_config
 language_system
@@ -132,4 +124,3 @@ password_user
 edit_sudoers
 grub_install
 finish_install
-
