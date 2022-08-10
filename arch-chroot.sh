@@ -16,11 +16,12 @@ timezone_config(){
 
 language_system(){
   nvim /etc/locale.gen
-  locale-gen
+  clear && locale-gen
   clear && printf "\nCole a linguagem descomentada abaixo (Ex: en_US.UTF-8):\n\n"
   read LANGUAGE
   echo LANG="$LANGUAGE" > /etc/locale.conf
   export "$LANGUAGE"
+  read -p 'LOCALE configurado, PRESSIONE ENTER PARA CONTINUAR...'
 }
 
 keymap_config(){
@@ -61,7 +62,7 @@ pacman_config(){
 }
 
 repo_update(){
-  pacman -Syy
+  clear && pacman -Syy
 }
 
 password_root(){
@@ -101,7 +102,7 @@ edit_sudoers(){
 }
 
 grub_install(){
-  pacman -S grub efibootmgr --noconfirm
+  clear && pacman -S grub efibootmgr --noconfirm
   grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ArchLinux --recheck
   grub-mkconfig -o /boot/grub/grub.cfg
 }
