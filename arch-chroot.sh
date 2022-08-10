@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Script archlinux chroot
 # Franklin Souza
 # @FranklinTech
 
@@ -15,8 +16,8 @@ timezone_config(){
 
 language_system(){
   nvim /etc/locale.gen
-  clear && locale-gen
-  printf "\nCole a linguagem descomentada abaixo (Ex: en_US.UTF-8):\n\n"
+  locale-gen
+  clear && printf "\nCole a linguagem descomentada abaixo (Ex: en_US.UTF-8):\n\n"
   read LANGUAGE
   echo LANG="$LANGUAGE" > /etc/locale.conf
   export "$LANGUAGE"
@@ -90,7 +91,7 @@ user_create(){
 
 password_user(){
   clear && read -p 'Digite e confirme a sua senha de usuario abaixo (CUIDADO A SENHA NÃO É EXIBIDA) PRESSIONE ENTER PARA CONTINUAR...'
-  clear && read -p 'Digite o nome do seu user abaixo:'
+  clear && printf "Digite seu nome de usuario abaixo:\n\n"
   read USERNAME1
   passwd "$USERNAME1"
 }
