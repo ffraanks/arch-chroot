@@ -20,7 +20,7 @@ language_system(){
   printf "\nCole a linguagem descomentada abaixo (Ex: en_US.UTF-8):\n\n"
   read LANGUAGE
   echo LANG="$LANGUAGE" > /etc/locale.conf
-  export "$LANGUAGE"
+  export LANG="$LANGUAGE"
   read -p 'LOCALE configurado, PRESSIONE ENTER PARA CONTINUAR...'
 }
 
