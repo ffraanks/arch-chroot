@@ -9,8 +9,8 @@ dhcpcd_enable(){
 
 timezone_config(){
   ln -sf /usr/share/zoneinfo/America/Recife /etc/localtime
-hwclock --systohc
-timedatectl set-ntp true
+  hwclock --systohc
+  timedatectl set-ntp true
 }
 
 language_system(){
