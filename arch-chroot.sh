@@ -17,7 +17,7 @@ timezone_config(){
 language_system(){
   nvim /etc/locale.gen
   clear && locale-gen
-  clear && printf "\nCole a linguagem descomentada abaixo (Ex: en_US.UTF-8):\n\n"
+  printf "\nCole a linguagem descomentada abaixo (Ex: en_US.UTF-8):\n\n"
   read LANGUAGE
   echo LANG="$LANGUAGE" > /etc/locale.conf
   export "$LANGUAGE"
