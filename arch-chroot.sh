@@ -63,6 +63,7 @@ pacman_config(){
   sed -i -r 's/^#(.*VerbosePkgLists.*)$/\1/' /etc/pacman.conf
   sed -i -r 's/^#(.*ParallelDownloads.*)$/\1/' /etc/pacman.conf
   sed -i '/ParallelDownloads/s/5/60/g' /etc/pacman.conf
+  sed -i '38s/$/ILoveCandy/' /etc/pacman.conf
   sed -i '93,94s/^#//' /etc/pacman.conf
   #echo ILoveCandy >> /etc/pacman.conf
 }
