@@ -15,12 +15,10 @@ timezone_config(){
 }
 
 language_system(){
-  nvim /etc/locale.gen
+  sed -i -r 's/^#(.*en_US.UTF-8 UTF-8.*)$/\1/' /etc/locale.gen
   clear && locale-gen
-  printf "\nCole a linguagem descomentada abaixo (Ex: en_US.UTF-8):\n\n"
-  read LANGUAGE
-  echo LANG="$LANGUAGE" > /etc/locale.conf
-  export LANG="$LANGUAGE"
+  echo LANG=en_US.UTF-8 UTF-8 > /etc/locale.conf
+  export LANG=en_US.UTF-8 UTF-8
   read -p 'LOCALE configurado, PRESSIONE ENTER PARA CONTINUAR...'
 }
 
@@ -58,7 +56,14 @@ kernels_download(){
   fi
 }
 pacman_config(){
-  nvim /etc/pacman.conf
+  sed -i -r 's/^#(.*UseSyslog.*)$/\1/' /etc/pacman.conf
+  sed -i -r 's/^#(.*Color.*)$/\1/' /etc/pacman.conf
+  sed -i -r 's/^#(.*CheckSpace.*)$/\1/' /etc/pacman.conf
+  sed -i -r 's/^#(.*VerbosePkgLists.*)$/\1/' /etc/pacman.conf
+  sed -i -r 's/^#(.*ParallelDownloads.*)$/\1/' /etc/pacman.conf
+  sed -i '/ParallelDownloads/s/5/60/g' /etc/pacman.conf
+  sed -i '94,95s/^#//' /etc/pacman.conf
+  echo ILoveCandy >> /etc/pacman.conf
 }
 
 repo_update(){
@@ -98,7 +103,7 @@ password_user(){
 }
 
 edit_sudoers(){
-  nvim /etc/sudoers
+  sed -i -r 's/^#(.*%wheel ALL=(ALL:ALL) ALL.*)$/\1/' /etc/sudoers
 }
 
 grub_install(){
