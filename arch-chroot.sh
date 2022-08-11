@@ -18,8 +18,8 @@ language_system(){
   #sed -i -r 's/^#(.*en_US.UTF-8 UTF-8.*)$/\1/' /etc/locale.gen
   sed -i '177s/^#//' /etc/locale.gen
   clear && locale-gen
-  echo LANG=en_US.UTF-8 UTF-8 > /etc/locale.conf
-  export LANG=en_US.UTF-8 UTF-8
+  echo LANG=en_US.UTF-8 > /etc/locale.conf
+  export LANG=en_US.UTF-8
   read -p 'LOCALE configurado, PRESSIONE ENTER PARA CONTINUAR...'
 }
 
