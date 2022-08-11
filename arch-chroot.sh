@@ -5,6 +5,7 @@
 # @FranklinTech
 
 dhcpcd_enable(){
+  clear
   systemctl enable dhcpcd
 }
 
