@@ -105,7 +105,8 @@ password_user(){
 }
 
 edit_sudoers(){
-  sed -i -r 's/^#(.*%wheel ALL=(ALL:ALL) ALL.*)$/\1/' /etc/sudoers
+  sed -i '85s/^#//' /etc/sudoers
+  #sed -i -r 's/^#(.*%wheel ALL=(ALL:ALL) ALL.*)$/\1/' /etc/sudoers
 }
 
 grub_install(){
