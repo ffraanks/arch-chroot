@@ -15,7 +15,8 @@ timezone_config(){
 }
 
 language_system(){
-  sed -i -r 's/^#(.*en_US.UTF-8 UTF-8.*)$/\1/' /etc/locale.gen
+  #sed -i -r 's/^#(.*en_US.UTF-8 UTF-8.*)$/\1/' /etc/locale.gen
+  sed -i '177s/^#//' /etc/locale.gen
   clear && locale-gen
   echo LANG=en_US.UTF-8 UTF-8 > /etc/locale.conf
   export LANG=en_US.UTF-8 UTF-8
@@ -62,8 +63,9 @@ pacman_config(){
   sed -i -r 's/^#(.*VerbosePkgLists.*)$/\1/' /etc/pacman.conf
   sed -i -r 's/^#(.*ParallelDownloads.*)$/\1/' /etc/pacman.conf
   sed -i '/ParallelDownloads/s/5/60/g' /etc/pacman.conf
-  sed -i '94,95s/^#//' /etc/pacman.conf
-  echo ILoveCandy >> /etc/pacman.conf
+  sed -i '94s/^#//' /etc/pacman.conf
+  sed -i '95s/^#//' /etc/pacman.conf
+  #echo ILoveCandy >> /etc/pacman.conf
 }
 
 repo_update(){
