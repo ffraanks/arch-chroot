@@ -4,17 +4,20 @@
 # Franklin Souza
 # @FranklinTech
 
+# Habilitar rede dhcp
 dhcpcd_enable(){
   clear
   systemctl enable dhcpcd
 }
 
+# Alterar fuso-horario
 timezone_config(){
   ln -sf /usr/share/zoneinfo/America/Recife /etc/localtime
   hwclock --systohc
   timedatectl set-ntp true
 }
 
+# Definir linguagem do sistema
 language_system(){
   #sed -i -r 's/^#(.*en_US.UTF-8 UTF-8.*)$/\1/' /etc/locale.gen
   sed -i '177s/^#//' /etc/locale.gen
@@ -24,20 +27,24 @@ language_system(){
   read -p 'LOCALE configurado, PRESSIONE ENTER PARA CONTINUAR...'
 }
 
+# Configurar o abnt2 para bootar com o sistema
 keymap_config(){
   echo KEYMAP=br-abnt2 > /etc/vconsole.conf
 }
 
+# Alterar o nome da maquina
 hostname_config(){
   clear && printf "Digite abaixo um hostname para a sua maquina:\n\n"
   read HOST_NAME
   echo "$HOST_NAME" > /etc/hostname
 }
 
+# Instalar o btrfs-progs
 btrfs_progs_config(){
   pacman -S btrfs-progs --noconfirm
 }
 
+# Instalar kernels
 kernels_download(){
   clear && printf "Escolha seu kernel de preferência:\n\n[1] - linux (Kernel defautl)\n[2] - linux-hardened (Kernel focado na segurança)\n[3] - linux-lts (Kernel a longo prazo)\n[4] - linux-zen (Kernel focado em desempenho)\n\n"
   read KERNEL_CHOICE
@@ -57,6 +64,8 @@ kernels_download(){
     read -p 'Opção invalida, POR FAVOR ESCOLHA UM KERNEL, PRESSIONE ENTER PARA CONTINUAR...' && kernels_download
   fi
 }
+
+# Configurar o pacman
 pacman_config(){
   sed -i -r 's/^#(.*UseSyslog.*)$/\1/' /etc/pacman.conf
   sed -i -r 's/^#(.*Color.*)$/\1/' /etc/pacman.conf
@@ -69,15 +78,18 @@ pacman_config(){
   #echo ILoveCandy >> /etc/pacman.conf
 }
 
+# Atualizar o repositorio
 repo_update(){
   clear && pacman -Syy
 }
 
+# Definir senha ROOT
 password_root(){
   clear && printf "Digite e confirme sua senha root abaixo (CUIDADO A SENHA NÃO É EXIBIDA):\n\n"
   passwd
 }
 
+# Criar um usuario
 user_create(){
   clear && printf "Criando usuario, escolha seu shell de preferência:\n\n[1] - bash\n[2] - zsh\n\n"
   read SHELL_CHOICE
@@ -98,6 +110,7 @@ user_create(){
   fi
 }
 
+# Definir senha do USUARIO
 password_user(){
   clear && read -p 'Digite e confirme a sua senha de usuario abaixo (CUIDADO A SENHA NÃO É EXIBIDA) PRESSIONE ENTER PARA CONTINUAR...'
   clear && printf "Digite seu nome de usuario abaixo:\n\n"
@@ -105,18 +118,21 @@ password_user(){
   passwd "$USERNAME1"
 }
 
+# Editar o arquivo do sudo
 edit_sudoers(){
   sed -i '85s/^#//' /etc/sudoers
   sed -i '85s/^[ \t]*//' /etc/sudoers
   #sed -i -r 's/^#(.*%wheel ALL=(ALL:ALL) ALL.*)$/\1/' /etc/sudoers
 }
 
+# Baixar e instalar o grub
 grub_install(){
   clear && pacman -S grub efibootmgr --noconfirm
   grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ArchLinux --recheck
   grub-mkconfig -o /boot/grub/grub.cfg
 }
 
+# Finalaização do script
 finish_install(){
   clear && read -p 'Instalação finalizada, NÃO ESQUEÇA DE SAIR DO CHROOT E REBOOTAR O PC!!! PRESSIONE ENTER PARA CONTINUAR...' && exit 0
 }
