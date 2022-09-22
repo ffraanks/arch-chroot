@@ -20,7 +20,7 @@ timezone_config(){
 # Definir linguagem do sistema
 language_system(){
   #sed -i -r 's/^#(.*en_US.UTF-8 UTF-8.*)$/\1/' /etc/locale.gen
-  sed -i '172s/^#//' /etc/locale.gen
+  sed -i '171s/^#//' /etc/locale.gen
   clear && locale-gen
   echo LANG=en_US.UTF-8 > /etc/locale.conf
   export LANG=en_US.UTF-8
